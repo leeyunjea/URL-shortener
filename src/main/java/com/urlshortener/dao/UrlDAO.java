@@ -8,11 +8,11 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.cj.xdevapi.Statement;
 import com.urlshortener.model.Url;
-
-import kr.ac.hansung.model.Users;
 
 @Repository
 public class UrlDAO {
@@ -34,32 +34,19 @@ public class UrlDAO {
 		return (jdbcTemplate.update(sqlStatement, new Object[] { longUrl, shortUrl }) == 1);
 	}
 
-	public Url getLastId() {
+	public int getLastId() {
 
-		String sqlStatement = "SELECT LAST_INSERT_ID()";
+		String sqlStatement = "SELECT MAX(id) AS id FROM url";
 
-		return (jdbcTemplate.queryForObject(sqlStatement, new RowMapper<Url>() {
+		return jdbcTemplate.queryForObject(sqlStatement, Integer.class);
 
-			@Override
-			public Url mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-				Url url = new Url();
-
-				url.setId(rs.getInt("id"));
-				url.setLongUrl(rs.getString("longUrl"));
-				url.setShortUrl(rs.getString("shortUrl"));
-
-				return url;
-
-			}
-		}));
 	}
-	
-	public Url getLastId(String shortUrl) {
+
+	public Url getShortUrl(String shortUrl) {
 
 		String sqlStatement = "select * from url shortUrl = ?";
 
-		return (jdbcTemplate.queryForObject(sqlStatement,new Object[] { shortUrl }, new RowMapper<Url>() {
+		return (jdbcTemplate.queryForObject(sqlStatement, new Object[] { shortUrl }, new RowMapper<Url>() {
 
 			@Override
 			public Url mapRow(ResultSet rs, int rowNum) throws SQLException {
