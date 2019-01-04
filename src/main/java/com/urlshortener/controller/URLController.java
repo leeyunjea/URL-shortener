@@ -23,7 +23,6 @@ public class URLController {
 	@RequestMapping("/shorten")
 	public String urlInput(@RequestParam(value="url", required=false) String longUrl, Model model) { 
 		
-		
 		Url url = new Url();
 		url.setLongUrl(longUrl);
 		
@@ -37,10 +36,9 @@ public class URLController {
 			return "home";
 		}
 		
-		
 	}
 	
-	@RequestMapping("/yj/{shortUrl}")
+	@RequestMapping("/yj.io/{shortUrl}")
 	public String shortUrlToLongUrl(@PathVariable String shortUrl, Model model) { 
 		
 		Url url = urlService.getUrl(shortUrl);
@@ -48,7 +46,6 @@ public class URLController {
 		String longUrl = url.getLongUrl();
 		
 		return "redirect:"+longUrl;
-		
 		
 	}
 }

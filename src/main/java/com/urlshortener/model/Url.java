@@ -3,9 +3,9 @@ package com.urlshortener.model;
 
 public class Url {
 
-	int id;
-	String longUrl;
-	String shortUrl;
+	private int id;
+	private String longUrl;
+	private String shortUrl;
 	
 	public int getId() {
 		return id;
