@@ -10,11 +10,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.cj.xdevapi.Statement;
 import com.urlshortener.model.Url;
 
 @Repository
+@Transactional
 public class UrlDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -42,9 +44,9 @@ public class UrlDAO {
 
 	}
 
-	public Url getShortUrl(String shortUrl) {
+	public Url getUrl(String shortUrl) {
 
-		String sqlStatement = "select * from url shortUrl = ?";
+		String sqlStatement = "select * from url where shortUrl = ?";
 
 		return (jdbcTemplate.queryForObject(sqlStatement, new Object[] { shortUrl }, new RowMapper<Url>() {
 
