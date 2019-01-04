@@ -55,7 +55,7 @@
 <fieldset class="cf">
 <p>
 
-	 <a href="<c:url value="/yj/${shortUrl}"/>" >https://localhost:8080/yj/${shortUrl}</a>
+	 <a href="<c:url value="/yj.io/${shortUrl}"/>" >https://localhost:8080/yj.io/${shortUrl}</a>
 
 </p>
 <%-- <input id="shorten_url" taborder="1" name="url" type="text" class="shorten-input" placeholder="shorten link" value="${url.shortUrl}" autocomplete="off" autocorrect="off" autocapitalize="off" /> --%>
