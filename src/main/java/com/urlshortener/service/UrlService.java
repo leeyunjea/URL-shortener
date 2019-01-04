@@ -21,7 +21,7 @@ public class UrlService {
 		return urlDao.getLastId();
 	}
 	
-	public Url getShortUrl(String shortUrl) {
-		return urlDao.getShortUrl(shortUrl);
+	public Url getUrl(String shortUrl) {
+		return urlDao.getUrl(shortUrl);
 	}
 }
