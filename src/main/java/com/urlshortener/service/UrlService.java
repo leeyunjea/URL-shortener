@@ -24,4 +24,8 @@ public class UrlService {
 	public Url getUrl(String shortUrl) {
 		return urlDao.getUrl(shortUrl);
 	}
+	
+	public Url getUrlFromLongUrl(String longUrl) {
+		return urlDao.getUrlFromLongUrl(longUrl);
+	}
 }
