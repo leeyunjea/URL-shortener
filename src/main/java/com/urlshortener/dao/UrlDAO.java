@@ -39,8 +39,14 @@ public class UrlDAO {
 	public int getLastId() {
 
 		String sqlStatement = "SELECT MAX(id) AS id FROM url";
+		int lastId = -1;
+		try {
+			lastId = jdbcTemplate.queryForObject(sqlStatement, Integer.class);
+		} catch (Exception e) {
+			lastId = 0;
+		}
 
-		return jdbcTemplate.queryForObject(sqlStatement, Integer.class);
+		return lastId;
 
 	}
 
@@ -63,5 +69,31 @@ public class UrlDAO {
 
 			}
 		}));
+	}
+
+	public Url getUrlFromLongUrl(String longUrl) {
+
+		System.out.println("longURL" + longUrl);
+
+		String sqlStatement = "select * from url where longUrl = ?";
+
+		try {
+			return (jdbcTemplate.queryForObject(sqlStatement, new Object[] { longUrl }, new RowMapper<Url>() {
+
+				@Override
+				public Url mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+					Url url = new Url();
+					url.setId(rs.getInt("id"));
+					url.setLongUrl(rs.getString("longUrl"));
+					url.setShortUrl(rs.getString("shortUrl"));
+
+					return url;
+
+				}
+			}));
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
