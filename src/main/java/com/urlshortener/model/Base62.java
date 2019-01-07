@@ -2,19 +2,10 @@ package com.urlshortener.model;
 
 public class Base62 {
 	
-	private static Base62 base62Instance;
 
 	final private static int RADIX = 62;
 	final private static String CODEC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	
-	private Base62() {}
-	
-	public static synchronized Base62 getInstance() {
-		if(base62Instance == null){
-			base62Instance = new Base62();
-		}
-		return base62Instance;
-	}
 	
 	public String encode(long param) {
 		StringBuffer sb = new StringBuffer();
