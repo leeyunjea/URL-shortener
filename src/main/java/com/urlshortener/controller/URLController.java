@@ -17,10 +17,11 @@ public class URLController {
 	@Autowired
 	public UrlService urlService;
 
-	public Base62 base62 = Base62.getInstance();
 
 	@RequestMapping("/shorten")
 	public String urlInput(@RequestParam(value = "url", required = false) String longUrl, Model model) {
+		
+		Base62 base62 = new Base62();
 
 		Url searchUrl = urlService.getUrlFromLongUrl(longUrl);
 		if (searchUrl != null) {
