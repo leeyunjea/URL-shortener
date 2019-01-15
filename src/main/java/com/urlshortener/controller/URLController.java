@@ -32,7 +32,7 @@ public class URLController {
 			Url url = new Url();
 			url.setLongUrl(longUrl);
 
-			String shortUrl = base62.encode((urlService.getLastId() + 1) * 10000000);
+			String shortUrl = base62.encode((urlService.getLastId() + 1));
 			url.setShortUrl(shortUrl);
 
 			if (!urlService.insert(url)) { // DB 입력 실패
